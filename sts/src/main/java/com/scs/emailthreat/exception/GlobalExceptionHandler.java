@@ -1,3 +1,5 @@
+
+
 package com.scs.emailthreat.exception;
 
 import com.scs.emailthreat.dto.EmailResponseDTO;
@@ -14,3 +16,5 @@ public class GlobalExceptionHandler {
                 .body(new EmailResponseDTO("SERVER_ERROR", 0.0));
     }
 }
+
+

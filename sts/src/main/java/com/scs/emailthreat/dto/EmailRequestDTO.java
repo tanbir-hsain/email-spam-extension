@@ -1,3 +1,4 @@
+
 package com.scs.emailthreat.dto;
 
 public class EmailRequestDTO {
@@ -12,3 +13,6 @@ public class EmailRequestDTO {
         this.emailText = emailText;
     }
 }
+
+
+

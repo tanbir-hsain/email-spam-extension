@@ -1,3 +1,5 @@
+
+
 package com.scs.emailthreat.dto;
 
 public class EmailResponseDTO {
@@ -18,3 +20,4 @@ public class EmailResponseDTO {
         return confidence;
     }
 }
+

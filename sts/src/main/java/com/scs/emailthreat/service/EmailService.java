@@ -1,3 +1,4 @@
+
 package com.scs.emailthreat.service;
 
 import com.scs.emailthreat.dto.EmailResponseDTO;
@@ -42,3 +43,5 @@ public class EmailService {
         }
     }
 }
+
+

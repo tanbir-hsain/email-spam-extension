@@ -1,3 +1,4 @@
+
 console.log("GLOBAL Spam Detector Running");
 
 function getEmailText() {
@@ -21,6 +22,7 @@ setInterval(() => {
             emailText: text
         })
     })
+    
     .then(res => res.json())
     .then(data => {
         let box = document.getElementById("spam-box");
@@ -44,3 +46,7 @@ setInterval(() => {
     .catch(err => console.log("Error:", err));
 
 }, 4000);
+
+
+
+

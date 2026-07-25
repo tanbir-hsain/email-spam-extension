@@ -1,3 +1,4 @@
+
 package com.scs.emailthreat.controller;
 
 import com.scs.emailthreat.dto.EmailRequestDTO;
@@ -13,6 +14,7 @@ public class EmailController {
 
     private final EmailService emailService;
 
+    //constructor injection
     public EmailController(EmailService emailService) {
         this.emailService = emailService;
     }
@@ -28,3 +30,8 @@ public class EmailController {
         return ResponseEntity.ok(emailService.analyze(request.getEmailText()));
     }
 }
+
+
+
+
+
