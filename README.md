@@ -2,11 +2,11 @@
 
 ## Project Description
 
-Email Spam Extension built using a Browser Extension, Spring Boot, Flask, REST APIs, and Machine Learning to classify Gmail emails as Spam or Ham.
+Email Spam Extension is a full-stack email spam detection system that combines a Chrome browser extension, Spring Boot backend, Flask-based Machine Learning API, and Natural Language Processing.
 
-The Browser Extension automatically captures email content from Gmail and sends it to the Spring Boot backend. The backend communicates with a Flask-based Machine Learning API through REST APIs. The Machine Learning model analyzes the email and returns the prediction (SPAM or HAM), which is displayed inside the browser.
+The browser extension automatically extracts email content from Gmail and sends it to the Spring Boot backend through a REST API. The Spring Boot backend communicates with the Flask Machine Learning service, which analyzes the email using a trained spam classification model and returns the prediction.
 
-This project demonstrates Browser Extension Development, Backend Development, REST API Integration, and Machine Learning deployment.
+This project demonstrates Browser Extension Development, Backend Development, REST API Integration, Machine Learning, Natural Language Processing, and GitHub Actions (CI).
 
 ---
 
@@ -16,13 +16,16 @@ This project demonstrates Browser Extension Development, Backend Development, RE
 - Spring Boot
 - Python
 - Flask
-- Machine Learning
 - Scikit-learn
 - Pandas
 - NumPy
-- REST APIs
+- JavaScript
 - Chrome Browser Extension
-- Git & GitHub
+- REST APIs
+- Maven
+- Git
+- GitHub
+- GitHub Actions (CI)
 
 ---
 
@@ -33,54 +36,60 @@ User
    ↓
 Gmail
    ↓
-Browser Extension
+Chrome Browser Extension
    ↓
-Spring Boot Backend
-   ↓
-REST API
+Spring Boot REST API
    ↓
 Flask Machine Learning API
    ↓
-Spam Detection Model
+TF-IDF Vectorization
    ↓
-Prediction (SPAM / HAM)
+Multinomial Naive Bayes Model
    ↓
-Browser Extension displays result
+SPAM / HAM Prediction
+   ↓
+Spring Boot
+   ↓
+Browser Extension
+   ↓
+Prediction displayed in Gmail
 ```
 
 ---
 
 ## Features
 
-- Browser Extension for Gmail
+- Gmail browser extension for email analysis
 - Automatic email content extraction
-- Real-time Spam/Ham prediction
-- REST API integration between Spring Boot and Flask
-- Machine Learning based email classification
-- Clean separation between Browser Extension, Backend, and ML Service
+- Real-time spam/ham prediction
+- Spring Boot REST API
+- Flask Machine Learning API
+- TF-IDF text vectorization
+- Multinomial Naive Bayes classification
+- Input validation
+- Global exception handling
+- REST API communication between Java and Python services
+- GitHub Actions CI workflow
 
 ---
 
 ## Project Workflow
 
 1. User opens an email in Gmail.
-2. Browser Extension extracts the email content.
-3. Browser Extension sends the email content to the Spring Boot backend.
+2. Chrome Extension extracts the email content.
+3. Extension sends the email text to the Spring Boot backend.
 4. Spring Boot validates the request.
-5. Spring Boot sends the email text to the Flask API using REST APIs.
+5. Spring Boot sends the email text to the Flask Machine Learning API.
 6. Flask preprocesses the email text.
-7. The Machine Learning model predicts whether the email is SPAM or HAM.
-8. Flask returns the prediction to Spring Boot.
-9. Spring Boot sends the response back to the Browser Extension.
-10. Browser Extension displays the prediction inside Gmail.
+7. TF-IDF converts the text into numerical features.
+8. Multinomial Naive Bayes predicts whether the email is SPAM or HAM.
+9. Flask returns the prediction.
+10. Spring Boot sends the result back to the browser extension.
+11. The extension displays the spam detection result inside Gmail.
 
 ---
 
 ## Machine Learning Model
-
-### Dataset
-
-- spam.csv
 
 ### Algorithm
 
@@ -88,45 +97,106 @@ Browser Extension displays result
 
 ### Text Processing
 
-- TF-IDF Vectorizer
+- Text cleaning
+- Lowercase conversion
+- Special-character removal
+- TF-IDF Vectorization
 
-### Libraries
+### Dataset
 
-- Scikit-learn
-- Pandas
-- NumPy
+- spam.csv
+
+### Saved Model Files
+
+- spam_model.pkl
+- vectorizer.pkl
+
+### Training
+
+The model is trained using the train_model.py script.
+
+The dataset is divided into training and testing sets, and the trained model and TF-IDF vectorizer are saved for use by the Flask API.
+
+---
+
+## Screenshots
+
+### Gmail Spam Detection
+
+![Gmail Spam Detection](screenshots/spam-detection.png)
+
+### Backend
+
+![Extension UI](screenshots/extension-ui.png)
+
+---
+
+## Project Structure
+
+```text
+email-spam-extension/
+│
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
+├── email-extension/
+│   ├── content.js
+│   └── manifest.json
+│
+├── sts/
+│   ├── src/
+│   │   └── main/
+│   │       ├── java/
+│   │       │   └── com/scs/emailthreat/
+│   │       │       ├── controller/
+│   │       │       │   └── EmailController.java
+│   │       │       ├── dto/
+│   │       │       │   ├── EmailRequestDTO.java
+│   │       │       │   └── EmailResponseDTO.java
+│   │       │       ├── exception/
+│   │       │       │   └── GlobalExceptionHandler.java
+│   │       │       ├── service/
+│   │       │       │   └── EmailService.java
+│   │       │       └── SmartEmailThreatDetectionSystemApplication.java
+│   │       │
+│   │       └── resources/
+│   │
+│   ├── pom.xml
+│   ├── mvnw
+│   └── mvnw.cmd
+│
+├── app.py
+├── train_model.py
+├── spam.csv
+├── spam_model.pkl
+├── vectorizer.pkl
+├── requirements.txt
+└── README.md
+```
 
 ---
 
 ## Setup Instructions
 
-### Browser Extension
+### Clone Repository
 
-1. Open Chrome.
-2. Go to **chrome://extensions/**
-3. Enable **Developer Mode**.
-4. Click **Load unpacked**.
-5. Select the `email-extension` folder.
-
----
-
-### Backend (Spring Boot)
-
-1. Open the Spring Boot project.
-2. Configure `application.properties` if required.
-3. Run the Spring Boot application.
+```bash
+git clone https://github.com/tanbir-hsain/email-spam-extension.git
+cd email-spam-extension
+```
 
 ---
 
-### ML Service (Flask)
+### Machine Learning Service
 
-Install dependencies
+Install Python dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the Flask application
+Run the Flask application:
 
 ```bash
 python app.py
@@ -134,15 +204,65 @@ python app.py
 
 ---
 
+### Backend
+
+Navigate to the Spring Boot project:
+
+```bash
+cd sts
+```
+
+Run the application:
+
+```bash
+./mvnw spring-boot:run
+```
+
+On Windows:
+
+```bash
+mvnw.cmd spring-boot:run
+```
+
+The Spring Boot backend runs on:
+
+```text
+http://localhost:8080
+```
+
+---
+
+### Browser Extension
+
+Open Google Chrome.
+
+Navigate to:
+
+```text
+chrome://extensions/
+```
+
+Enable Developer Mode.
+
+Select Load unpacked.
+
+Select the email-extension folder.
+
+Open Gmail and open an email.
+
+The extension sends the email content to the backend for analysis.
+
+---
+
 ## API Endpoint
 
-### Request
+### Analyze Email
 
 ```http
 POST /email/analyze
 ```
 
-Example Request
+### Request
 
 ```json
 {
@@ -150,7 +270,7 @@ Example Request
 }
 ```
 
-Example Response
+### Response
 
 ```json
 {
@@ -159,36 +279,67 @@ Example Response
 }
 ```
 
+The current Spring Boot service returns a confidence value of 1.0 rather than the actual confidence score from the Machine Learning model.
+
+### Invalid Request
+
+```json
+{
+  "result": "INVALID_INPUT",
+  "confidence": 0.0
+}
+```
+
+---
+
+## CI / GitHub Actions
+
+The project uses GitHub Actions for Continuous Integration.
+
+The CI workflow automatically checks the project whenever changes are pushed to GitHub.
+
+The workflow includes checks for:
+
+- Python environment
+- Python dependencies
+- Java/Maven project
+- Build validation
+
+This helps ensure that changes pushed to the repository do not break the project.
+
 ---
 
 ## Skills Demonstrated
 
-- Java Programming
+- Java
 - Spring Boot
-- REST API Development
 - Python
 - Flask
-- Browser Extension Development
-- Machine Learning Integration
-- Backend Development
+- REST API Development
+- Machine Learning
+- Natural Language Processing
+- Scikit-learn
+- TF-IDF
+- Naive Bayes
+- Chrome Extension Development
 - API Integration
+- Maven
 - Git & GitHub
+- GitHub Actions (CI)
+- Full-Stack Development
 
 ---
 
 ## Future Improvements
 
-- Deploy Spring Boot and Flask on AWS EC2
+- Deploy Spring Boot and Flask services to AWS
 - Replace localhost APIs with cloud endpoints
-- Improve model accuracy using larger datasets
-- Add confidence score from the Machine Learning model
+- Improve spam classification accuracy with larger datasets
+- Add automated unit and integration tests
+- Add confidence scoring from the Machine Learning model
+- Improve Gmail UI integration
 - Support multiple email providers
-
----
-
-## Demo Video
-
-https://youtu.be/5glKjS0X9h8
+- Add Continuous Deployment (CD)
 
 ---
 
@@ -196,8 +347,10 @@ https://youtu.be/5glKjS0X9h8
 
 **Tanbir Hussain**
 
-GitHub  
-https://github.com/tanbir-hsain
+GitHub
 
-LinkedIn  
+https://github.com/tanbir-hsain/email-spam-extension
+
+LinkedIn
+
 https://www.linkedin.com/in/tanbir-hussain-76320b414
