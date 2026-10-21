@@ -125,7 +125,7 @@ The dataset is divided into training and testing sets, and the trained model and
 
 ![Gmail Spam Detection](screenshots/spam-detection.png)
 
-### Backend
+### Extension UI
 
 ![Extension UI](screenshots/extension-ui.png)
 
@@ -340,6 +340,14 @@ This helps ensure that changes pushed to the repository do not break the project
 - Improve Gmail UI integration
 - Support multiple email providers
 - Add Continuous Deployment (CD)
+
+---
+
+## Demo Video
+
+Watch the Email Spam Extension demo:
+
+[**Email Spam Extension — Watch Demo on YouTube**](https://youtu.be/5glKjS0X9h8)
 
 ---
 
